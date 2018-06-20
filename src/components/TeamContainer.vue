@@ -1,11 +1,31 @@
 <template>
-    <ul id="teamcontainer">
-      <div id="filterButton">Filtres de groupes</div>
-    </ul>
+<li name="groupFilter"><input type="radio" name="groupFilter" :group="lastGroupName">
+<span>{{this.lastGroupName}}</span>
+</li>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      lastGroupName: null
+    };
+  },
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    groupPoper() {
+      if (this.user.UserHotcom.Group.Name != this.lastGroupName) {
+        this.lastGroupName = this.user.UserHotcom.Group.Name;
+        return this.lastGroupName
+      }
+    }
+  }
+};
 </script>
 
 <style>

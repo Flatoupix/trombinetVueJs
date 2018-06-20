@@ -2,8 +2,12 @@
 <template>
   <div id="app">
     <div class="titleTn">Trombi<span>Net</span></div>
-  <TeamContainer v-for="user in users" :key="user.Group.Id" :user="user"></TeamContainer>
+    <div id="filterButton">Filtres de groupes</div>
+        <ul id="teamcontainer">
+  <TeamContainer v-for="user in users" :key="user.Id" :user="user"></TeamContainer>
+  </ul>
   <div id="userContainer">
+    
     <UserContainer v-for="user in users"
       :key="user.Id"
       :user="user"
@@ -19,7 +23,7 @@ import UserContainer from "./components/UserContainer.vue";
 
 export default {
   name: "app",
- 
+
   components: {
     TeamContainer,
     UserContainer
@@ -30,20 +34,27 @@ export default {
       users: null,
       loading: true,
       errored: false
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.$http
-      .get('https://ww2.eudonet.com/SPECIF/EUDO_HOTCOM_EUDOWEB/root/hotcom/Trombinoscope')
+      .get(
+        "https://ww2.eudonet.com/SPECIF/EUDO_HOTCOM_EUDOWEB/root/hotcom/Trombinoscope"
+      )
       .then(response => (this.users = response.data))
       .catch(error => {
-        console.log(error)
-        this.errored = true
+        console.log(error);
+        this.errored = true;
       })
-      .finally(() => this.loading = false)
+      .finally(() => (this.loading = false));
   }
-}
+};
 </script>
+
+
+
+
+
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Raleway");
