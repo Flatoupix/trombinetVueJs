@@ -2,11 +2,12 @@
 <template>
   <div id="app">
     <div class="titleTn">Trombi<span>Net</span></div>
-  <TeamContainer></TeamContainer>
-  <div class="userContainer">
+  <TeamContainer v-for="user in users" :key="user.Group.Id" :user="user"></TeamContainer>
+  <div id="userContainer">
     <UserContainer v-for="user in users"
       :key="user.Id"
-			:toto="user"></UserContainer>
+      :user="user"
+			></UserContainer>
     </div>
   
   </div>
@@ -25,6 +26,7 @@ export default {
   },
   data() {
     return {
+      //Déclaration du tableau qui récupérera l'objet trombinoscope
       users: null,
       loading: true,
       errored: false
@@ -40,17 +42,7 @@ export default {
       })
       .finally(() => this.loading = false)
   }
-  // created() {
-  //   let vm = this;
-  //   this.$http
-  //     .get(
-  //       "https://ww2.eudonet.com/SPECIF/EUDO_HOTCOM_EUDOWEB/root/hotcom/Trombinoscope"
-  //     )
-  //     .then(function(response) {
-  //       vm.users = response.data;
-  //     });
-  // }
-};
+}
 </script>
 
 <style>
