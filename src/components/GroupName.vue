@@ -1,5 +1,5 @@
 <template>
-  <li><input v-model="radioButtonValue" type="radio" :value="group.Id" name="groupFilter" >
+  <li><input @change="changeValue" v-model="radioButtonValue" type="radio" :value="group.Id" name="groupFilter" >
   <span >{{ group.Name }}</span>
 </li>
 </template>
@@ -60,14 +60,14 @@ input[type="radio"]:checked {
 input[type="radio"]:focus {
   outline: none;
 }
-#teamContainer > li {
+#filterContainer > li {
   display: inline-block;
   width: 20%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-#teamContainer > li > span {
+#filterContainer > li > span {
   display: inline-block;
   height: 40px;
   line-height: 25px;
@@ -75,7 +75,7 @@ input[type="radio"]:focus {
   font-weight: 600;
   color: black;
 }
-#teamContainer {
+#filterContainer {
   height: 0;
   width: 80%;
   margin: 0 auto;
@@ -101,8 +101,3 @@ input[type="radio"]:focus {
   box-shadow: inset 0 0 0 1em #efefef;
 } */
 </style>
-
-
-
-// WEBPACK FOOTER //
-// TeamContainer.vue
