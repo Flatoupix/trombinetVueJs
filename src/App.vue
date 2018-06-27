@@ -4,12 +4,17 @@
     <div class="titleTn">Trombi<span>Net</span></div>
     <div id="filterButton" @click="openFilters()" :class="[filterContainer.isActive ? 'activeBtn' : '' ]">Filtres de groupes</div>
         <ul id="filterContainer" :class="[filterContainer.isOpened ? 'containerOpened' : '']">
-  <GroupName  v-for="group in groups" :key="group.Id" :group="group"></GroupName>
+  <GroupName
+  @change="changeValue" 
+  v-for="group in oGroups.groups"
+   :key="group.Id" :group="group" name="groupFilter"/>
+
   </ul>
   <div id="userContainer">
     <UserContainer v-for="user in users"
       :key="user.Id"
       :user="user"
+      :currentGroup="oGroups.currentGroup"
 			></UserContainer>
     </div>
   </div>
@@ -30,7 +35,10 @@ export default {
       users: null,
       loading: true,
       errored: false,
-      groups: null,
+      oGroups: {
+        groups: null,
+        currentGroup: null
+      },
       filterContainer: {
         isOpened: false,
         isActive: false
@@ -44,11 +52,13 @@ export default {
       )
       .then(response => {
         this.users = response.data;
-        this.groups = this.users
+        this.oGroups.groups = this.users
           .map(o => o.UserHotcom.Group)
           .filter((obj, idx, arr) => {
             return arr.map(o => o["Id"]).indexOf(obj["Id"]) == idx;
           });
+
+        this.oGroups.groups.push({ Id:0, Name: "Pas de filtre" });
       })
       .catch(error => {
         console.log(error);
@@ -60,6 +70,9 @@ export default {
     openFilters() {
       this.filterContainer.isOpened = !this.filterContainer.isOpened;
       this.filterContainer.isActive = !this.filterContainer.isActive;
+    },
+    changeValue(newValue) {
+      this.oGroups.currentGroup = newValue;
     }
   }
 };

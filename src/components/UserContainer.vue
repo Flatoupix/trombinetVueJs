@@ -1,5 +1,5 @@
 <template>
-        <div class="userEl" :group=user.UserHotcom.Group.Name >
+        <div v-if="user.UserHotcom.Group.Name===currentGroup||currentGroup===null" class="userEl" :group=user.UserHotcom.Group.Name >
             <div class="userPhoto" :style="{ backgroundImage: 'url(' + photoExtract() + ')' }"></div>
             <div class="userTitle">{{ user.FirstName }}</div>
         </div>
@@ -11,7 +11,12 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    currentGroup: {
+      type: String,
+      required:true
     }
+    
   },
   methods: {
     photoExtract() {

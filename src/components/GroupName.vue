@@ -1,6 +1,6 @@
 <template>
-  <li><input @change="changeValue" v-model="radioButtonValue" type="radio" :value="group.Id" name="groupFilter" >
-  <span >{{ group.Name }}</span>
+  <li><input v-model="radioButtonValue" type="radio" :value="group.Name" :id="group.Id"  :name="name" >
+  <label :for="group.Id">{{ group.Name }}</label>
 </li>
 </template>
 
@@ -10,24 +10,17 @@ export default {
     group: {
       type: Object,
       required: false
-    }
+    },
+    name
   },
-  data() {
-    return {
-      checkedGroup: {
-        isChecked: false,
-        checkedValue: ""
-      }
-    };
+  methods: {
   },
-  methods: {},
   computed: {
     radioButtonValue: {
       get() {
-        return this.checkedGroup.checkedValue;
+        return this.value;
       },
       set() {
-        // Communicate the change to parent component so that selectedValue can be updated
         this.$emit("change", this.group.Name);
       }
     }
@@ -67,13 +60,14 @@ input[type="radio"]:focus {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-#filterContainer > li > span {
+#filterContainer > li > label {
   display: inline-block;
   height: 40px;
   line-height: 25px;
   vertical-align: middle;
   font-weight: 600;
   color: black;
+  cursor: pointer;
 }
 #filterContainer {
   height: 0;
@@ -84,9 +78,10 @@ input[type="radio"]:focus {
   margin-bottom: 3%;
   overflow: hidden;
   transition: 250ms;
+  padding:0 1%;
 }
-.containerOpened {
-  padding: 1% 0% 13% 1%;
+ul#filterContainer.containerOpened {
+  padding: 1% 1% 13% 1%;
 }
 /* input[type="radio"] {
   height: 2em;
