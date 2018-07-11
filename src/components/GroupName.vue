@@ -1,5 +1,7 @@
 <template>
-  <li><input v-model="radioButtonValue" type="radio" :value="group.Name" :id="group.Id"  :name="name" >
+  <li>
+  <input v-if="group.Name==noFilter"  v-model="noFilter" type="radio" :value="noFilter" :id="group.Id" :name="name" >
+  <input v-else v-model="radioButtonValue" type="radio" :value="group.Name" :id="group.Id"  :name="name" >
   <label :for="group.Id">{{ group.Name }}</label>
 </li>
 </template>
@@ -11,9 +13,9 @@ export default {
       type: Object,
       required: false
     },
-    name
-  },
-  methods: {
+    name,
+    noFilter:'Pas de filtre'
+  
   },
   computed: {
     radioButtonValue: {

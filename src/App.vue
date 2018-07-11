@@ -8,14 +8,14 @@
   @change="changeValue" 
   v-for="group in oGroups.groups"
    :key="group.Id" :group="group" name="groupFilter"/>
-
   </ul>
   <div id="userContainer">
-    <UserContainer v-for="user in users"
-      :key="user.Id"
-      :user="user"
-      :currentGroup="oGroups.currentGroup"
-			></UserContainer>
+   
+      <UserContainer v-for="user in users"
+        :key="user.Id"
+        :user="user"
+        :currentGroup="oGroups.currentGroup"
+        ></UserContainer>
     </div>
   </div>
 </template>
@@ -57,8 +57,7 @@ export default {
           .filter((obj, idx, arr) => {
             return arr.map(o => o["Id"]).indexOf(obj["Id"]) == idx;
           });
-
-        this.oGroups.groups.push({ Id:0, Name: "Pas de filtre" });
+        this.oGroups.groups.push({ Id: 0, Name: "Pas de filtre" });
       })
       .catch(error => {
         console.log(error);
@@ -77,11 +76,6 @@ export default {
   }
 };
 </script>
-
-
-
-
-
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Raleway");
@@ -117,17 +111,17 @@ div.titleTn > span {
 }
 
 #filterButton {
-  margin: 0 auto;
   font-size: 1.5vw;
   text-align: center;
   width: 14vw;
   padding: 0.4em;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 1%;
+  margin: 3% auto;
   color: white;
   border: 1px solid #bb1515;
   background-color: #bb1515;
+  -webkit-transition: 250ms;
   transition: 250ms;
 }
 

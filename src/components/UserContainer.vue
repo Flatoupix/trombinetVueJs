@@ -1,8 +1,10 @@
 <template>
-        <div v-if="user.UserHotcom.Group.Name===currentGroup||currentGroup===null" class="userEl" :group=user.UserHotcom.Group.Name >
-            <div class="userPhoto" :style="{ backgroundImage: 'url(' + photoExtract() + ')' }"></div>
-            <div class="userTitle">{{ user.FirstName }}</div>
-        </div>
+ <transition mode="out-in" name="slide-fade">
+      <div :key="user.Id" v-show="user.UserHotcom.Group.Name===currentGroup||currentGroup===null" class="userEl" :group=user.UserHotcom.Group.Name >
+          <div class="userPhoto" :style="{ backgroundImage: 'url(' + photoExtract() + ')' }"></div>
+          <div class="userTitle">{{ user.FirstName }}</div>
+      </div>
+       </transition>
 </template>
 
 <script>
@@ -12,11 +14,7 @@ export default {
       type: Object,
       required: true
     },
-    currentGroup: {
-      type: String,
-      required:true
-    }
-    
+    currentGroup: null
   },
   methods: {
     photoExtract() {
@@ -38,32 +36,41 @@ export default {
 </script>
 
 <style>
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+
 .userEl {
-    margin: 1.4vw;
-    display: inline-block;
-    height: 12vw;
-    width: 9.4vw;
-    -webkit-transition: 250ms;
-    transition: 250ms;
-    opacity: 1;
-    text-align: center;
+  margin: 1.9vw;
+  display: inline-block;
+  height: 9vw;
+  width: 7.4vw;
+  text-align: center;
 }
 .userPhoto {
-    height: 70%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: 2px solid #bb1515;
-    border-radius: 100%;
-    display: block;
+  height: 70%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid #bb1515;
+  border-radius: 100%;
+  display: block;
 }
 .userTitle {
-    display: block;
-    height: 20%;
-    width: 100%;
-    font-size: 2vw;
-    margin-top: 1vw;
+  display: block;
+  height: 20%;
+  width: 100%;
+  font-size: 2vw;
+  margin-top: 1vw;
 }
-
-
 </style>
