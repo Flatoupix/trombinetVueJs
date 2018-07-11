@@ -1,9 +1,12 @@
 <template>
+
   <li>
   <input v-if="group.Name==noFilter"  v-model="noFilter" type="radio" :value="noFilter" :id="group.Id" :name="name" >
   <input v-else v-model="radioButtonValue" type="radio" :value="group.Name" :id="group.Id"  :name="name" >
   <label :for="group.Id">{{ group.Name }}</label>
+ 
 </li>
+
 </template>
 
 <script>
@@ -31,6 +34,7 @@ export default {
 </script>
 
 <style>
+
 input[type="radio"] {
   height: 2em;
   width: 2em;
@@ -83,7 +87,7 @@ input[type="radio"]:focus {
   padding:0 1%;
 }
 ul#filterContainer.containerOpened {
-  padding: 1% 1% 13% 1%;
+  padding: 1% 1% 15% 1%;
 }
 /* input[type="radio"] {
   height: 2em;

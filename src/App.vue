@@ -9,15 +9,14 @@
   v-for="group in oGroups.groups"
    :key="group.Id" :group="group" name="groupFilter"/>
   </ul>
-  <div id="userContainer">
-   
-      <UserContainer v-for="user in users"
+   <ul id="userContainer">
+      <UserContainer  v-for="user in users"
         :key="user.Id"
         :user="user"
         :currentGroup="oGroups.currentGroup"
         ></UserContainer>
+   </ul>
     </div>
-  </div>
 </template>
 
 <script>
@@ -80,6 +79,8 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 
+
+
 html {
   font-family: Raleway, sans-serif;
 }
@@ -108,6 +109,7 @@ div.titleTn > span {
   width: 100%;
   margin: auto;
   text-align: center;
+  position: relative;
 }
 
 #filterButton {

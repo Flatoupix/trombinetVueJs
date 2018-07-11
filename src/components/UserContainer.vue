@@ -1,9 +1,9 @@
 <template>
- <transition mode="out-in" name="slide-fade">
-      <div :key="user.Id" v-show="user.UserHotcom.Group.Name===currentGroup||currentGroup===null" class="userEl" :group=user.UserHotcom.Group.Name >
+ <transition name="slide">
+      <li :key="user.Id" v-show="user.UserHotcom.Group.Name===currentGroup||currentGroup===null" class="userEl" :group=user.UserHotcom.Group.Name >
           <div class="userPhoto" :style="{ backgroundImage: 'url(' + photoExtract() + ')' }"></div>
           <div class="userTitle">{{ user.FirstName }}</div>
-      </div>
+      </li>
        </transition>
 </template>
 
@@ -24,7 +24,7 @@ export default {
       if (this.user.PhotoUrl != null) {
         sBackgroundUrl = this.user.PhotoUrl;
       } else if (this.user.UserHotcom.Avatar != null) {
-        sBackgroundUrl = path + this.user.UserHotcom.Avatar;
+        sBackgroundUrl = path + this.user.UserHotcom.Avatar
       } else {
         sBackgroundUrl =
           "https://vignette.wikia.nocookie.net/okami/images/5/53/Unknown_copyright_symbol.png";
@@ -37,20 +37,16 @@ export default {
 
 <style>
 
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
+.slide-enter-active, .slide-leave-active {
   opacity: 0;
+  transition: 0.5s;
 }
-
+.slide-enter, .slide-leave {
+position: absolute;
+}
 
 .userEl {
+  transition: all 500ms;
   margin: 1.9vw;
   display: inline-block;
   height: 9vw;
